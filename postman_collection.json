@@ -1,0 +1,393 @@
+{
+  "info": {
+    "name": "DeepSeek AI - Custom Scenarios API",
+    "description": "REST API cho DeepSeek AI với các kịch bản tùy chỉnh",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "session_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health & Status",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/health",
+            "description": "Kiểm tra trạng thái API và kết nối Ollama"
+          }
+        },
+        {
+          "name": "List Models",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/models",
+            "description": "Lấy danh sách models DeepSeek đã cài"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Scenarios",
+      "item": [
+        {
+          "name": "List All Scenarios",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/scenarios",
+            "description": "Lấy danh sách tất cả kịch bản có sẵn"
+          }
+        },
+        {
+          "name": "Get Scenario Detail - Default",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/scenarios/default"
+          }
+        },
+        {
+          "name": "Get Scenario Detail - Customer Support",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/scenarios/customer_support"
+          }
+        },
+        {
+          "name": "Get Scenario Detail - Teacher",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/scenarios/teacher"
+          }
+        },
+        {
+          "name": "Get Scenario Detail - Sales",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/scenarios/sales"
+          }
+        },
+        {
+          "name": "Get Scenario Detail - Technical",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/scenarios/technical"
+          }
+        },
+        {
+          "name": "Get Scenario Detail - Creative",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/scenarios/creative"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chat",
+      "item": [
+        {
+          "name": "Simple Chat",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Xin chào, bạn là ai?\"\n}"
+            },
+            "url": "{{base_url}}/api/chat",
+            "description": "Chat đơn giản không lưu lịch sử"
+          }
+        },
+        {
+          "name": "Chat - Customer Support",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Tôi quên mật khẩu, làm sao lấy lại?\",\n  \"scenario\": \"customer_support\"\n}"
+            },
+            "url": "{{base_url}}/api/chat"
+          }
+        },
+        {
+          "name": "Chat - Teacher",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Giải thích vòng lặp for trong Python\",\n  \"scenario\": \"teacher\"\n}"
+            },
+            "url": "{{base_url}}/api/chat"
+          }
+        },
+        {
+          "name": "Chat - Sales",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Tôi muốn mua laptop cho lập trình\",\n  \"scenario\": \"sales\"\n}"
+            },
+            "url": "{{base_url}}/api/chat"
+          }
+        },
+        {
+          "name": "Chat - Technical",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Sự khác biệt giữa GET và POST?\",\n  \"scenario\": \"technical\"\n}"
+            },
+            "url": "{{base_url}}/api/chat"
+          }
+        },
+        {
+          "name": "Chat - Creative",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Viết một đoạn mở đầu blog về du lịch\",\n  \"scenario\": \"creative\",\n  \"temperature\": 0.9\n}"
+            },
+            "url": "{{base_url}}/api/chat"
+          }
+        },
+        {
+          "name": "Chat with Custom Temperature",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Viết một câu về bầu trời\",\n  \"scenario\": \"creative\",\n  \"temperature\": 0.9\n}"
+            },
+            "url": "{{base_url}}/api/chat"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Session Management",
+      "item": [
+        {
+          "name": "Create Session",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.success && jsonData.session_id) {",
+                  "    pm.collectionVariables.set(\"session_id\", jsonData.session_id);",
+                  "    console.log(\"Session ID saved: \" + jsonData.session_id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/session",
+            "description": "Tạo session mới và lưu session_id vào biến"
+          }
+        },
+        {
+          "name": "Chat with History - Step 1",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Tên tôi là Minh, tôi đang học Python\",\n  \"session_id\": \"{{session_id}}\",\n  \"use_history\": true,\n  \"scenario\": \"teacher\"\n}"
+            },
+            "url": "{{base_url}}/api/chat"
+          }
+        },
+        {
+          "name": "Chat with History - Step 2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Tên tôi là gì?\",\n  \"session_id\": \"{{session_id}}\",\n  \"use_history\": true,\n  \"scenario\": \"teacher\"\n}"
+            },
+            "url": "{{base_url}}/api/chat",
+            "description": "AI sẽ nhớ tên là Minh từ tin nhắn trước"
+          }
+        },
+        {
+          "name": "Get Session Info",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/session/{{session_id}}",
+            "description": "Lấy thông tin session và lịch sử chat"
+          }
+        },
+        {
+          "name": "Clear Session History",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/session/{{session_id}}/history",
+            "description": "Xóa lịch sử chat nhưng giữ session"
+          }
+        },
+        {
+          "name": "Delete Session",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/session/{{session_id}}",
+            "description": "Xóa hoàn toàn session"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Batch Processing",
+      "item": [
+        {
+          "name": "Batch - Multiple Questions",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    \"Xin chào\",\n    \"Python là gì?\",\n    \"2 + 2 bằng mấy?\"\n  ],\n  \"scenario\": \"default\"\n}"
+            },
+            "url": "{{base_url}}/api/batch",
+            "description": "Xử lý nhiều câu hỏi cùng lúc"
+          }
+        },
+        {
+          "name": "Batch - FAQ Processing",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    \"Giờ làm việc của shop?\",\n    \"Địa chỉ cửa hàng?\",\n    \"Chính sách đổi trả?\",\n    \"Có ship hàng không?\"\n  ],\n  \"scenario\": \"customer_support\"\n}"
+            },
+            "url": "{{base_url}}/api/batch"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Error Cases",
+      "item": [
+        {
+          "name": "Empty Message (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"\"\n}"
+            },
+            "url": "{{base_url}}/api/chat"
+          }
+        },
+        {
+          "name": "Invalid Session (404)",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/session/invalid_session_id_12345"
+          }
+        },
+        {
+          "name": "Invalid Scenario",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/scenarios/nonexistent_scenario"
+          }
+        },
+        {
+          "name": "Invalid Endpoint (404)",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/invalid_endpoint"
+          }
+        }
+      ]
+    }
+  ]
+}
